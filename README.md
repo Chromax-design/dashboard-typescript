@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#Dashboard pages
 
-## Getting Started
+1. Dashboard (Home)
 
-First, run the development server:
+    Quick stats:
+    📸 Total projects • 🖼️ Total images • 🕒 Recent uploads
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    "Add New Project" quick button
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Recent activities (e.g. “FunFest 2025 uploaded”, “Orphanage outreach updated”)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Projects Manager
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This is the core.
 
-## Learn More
+    Table or card view of all your projects.
 
-To learn more about Next.js, take a look at the following resources:
+    Each project includes:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+        Title (e.g. “Benin Fashion Week 2024”)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+        Cover image
 
-## Deploy on Vercel
+        Date
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+        Tags (e.g. Fashion, Event)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+        Button: Manage Gallery / Edit Details
+
+3. Gallery Editor
+
+When you click into a project:
+
+    Upload new photos
+
+    Reorder or remove photos
+
+    Add captions (if you like telling the story per image)
+
+    Option to publish/unpublish the project
+
+4. Add New Project
+
+A form page with:
+
+    Project title
+
+    Description or short story (optional)
+
+    Cover image upload
+
+    Date
+
+    Tags
+
+    Gallery image upload
+
+5. Settings
+
+    Update:
+
+        Your logo
+
+        Fonts (e.g. Picoblack for “Cromax”, Chloe for titles)
+
+        Social media links
+
+    Choose the homepage layout (grid/list)
+
+    Customize colors (if you want dark/light options)
+
+# Demo
+https://themewagon.github.io/MatDash/
