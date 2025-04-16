@@ -7,7 +7,7 @@ export const store = configureStore({
     [unsplashApi.reducerPath]: unsplashApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(unsplashApi.middleware),
+    getDefaultMiddleware().concat(unsplashApi.middleware)
 })
 
 setupListeners(store.dispatch)
