@@ -22,8 +22,8 @@ const SidebarLinks = ({href, icon, label}:SidebarlinkProps) => {
     }
 
     return (
-        <SidebarMenuButton asChild className={`px-4 py-6 ${isActive ? 'bg-[#635bff]! text-white! shadow-lg! hover:text-white! hover:bg-[#635bff]!' : 'bg-transparent!'}`} isActive={isActive}>
-            <Link href={href} className="hover:text-[#635bff]!" onClick={()=> handleClick()}>
+        <SidebarMenuButton asChild className={`px-4 py-6 cursor-pointer ${isActive ? 'bg-blue-600! text-white! shadow-lg! hover:text-white! hover:bg-blue-500' : 'bg-transparent!'}`} isActive={isActive}>
+            <Link href={href} className="hover:text-blue-600!" onClick={()=> handleClick()}>
                 <span className="text-xl">
                     {icon}
                 </span>
