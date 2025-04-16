@@ -1,0 +1,17 @@
+"use client"
+
+import { AppSidebar } from "./app-sidebar"
+import { SidebarTrigger, useSidebar } from "./ui/sidebar"
+
+const TopBar = () => {
+  const { open, isMobile } = useSidebar()
+
+  return (
+    <div className={`fixed top-0 right-0 ${open ? 'w-[calc(100%-16rem)] duration-300' : 'w-full'} transition-all ease-in-out bg-white h-14 p-3 ${isMobile ? 'w-full' : ''}`}>
+      <AppSidebar />
+      <SidebarTrigger className="" />
+    </div>
+  )
+}
+
+export default TopBar

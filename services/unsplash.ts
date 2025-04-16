@@ -14,7 +14,7 @@ export const unsplashApi = createApi({
     }),
     endpoints: (builder) => ({
         getrandomImage: builder.query<string, void>({
-            query: () => `photos/random?query=fashion+runway+beauty+pretty+lady+sexy+hot&orientation=portrait`,
+            query: () => `photos/random?query=fashion+runway+beauty+pretty+lady+style+glamour&orientation=portrait`,
             transformResponse: (response: any)=> response.urls.full
         }),
     }),
