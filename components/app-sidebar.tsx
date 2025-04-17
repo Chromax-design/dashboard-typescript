@@ -32,7 +32,6 @@ export function AppSidebar() {
                 <SidebarGroup className="space-y-2">
                     <SidebarGroupLabel className="uppercase">utilities</SidebarGroupLabel>
                     <SidebarGroupContent>
-                        <SidebarLinks href="/projects" icon={<AiOutlineProject />} label="all projects" />
                         <SidebarLinks href="/addproject" icon={<MdAddCard />} label="add project" />
                         <SidebarLinks href="/settings" icon={<IoIosSettings />} label="settings" />
                     </SidebarGroupContent>

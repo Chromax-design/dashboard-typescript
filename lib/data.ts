@@ -39,7 +39,7 @@ export const projectDetails: projectDetailsTypes[] = [
     {
       title: 'Campus Lifestyle Series',
       thumbnail: 'https://picsum.photos/seed/campuslife/600/400',
-      category: 'Lifestyle',
+      category: 'Portrait',
       date: '2024-09-14',
       status: 'published',
     },
@@ -53,7 +53,7 @@ export const projectDetails: projectDetailsTypes[] = [
     {
       title: 'Light and Shadow',
       thumbnail: 'https://picsum.photos/seed/lightshadow/600/400',
-      category: 'Creative',
+      category: 'Documentary',
       date: '2024-08-30',
       status: 'published',
     },
@@ -67,14 +67,14 @@ export const projectDetails: projectDetailsTypes[] = [
     {
       title: 'Studio Expression',
       thumbnail: 'https://picsum.photos/seed/studioexpression/600/400',
-      category: 'Studio',
+      category: 'Fashion',
       date: '2024-11-27',
       status: 'published',
     },
     {
       title: 'Alte Expression',
       thumbnail: 'https://picsum.photos/seed/studioexpression/600/400',
-      category: 'Studio',
+      category: 'Fashion',
       date: '2024-11-27',
       status: 'published',
     }

@@ -42,17 +42,18 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
         accessorKey: "status",
         header: "Status",
         cell: ({ row }) => {
-            if (row.getValue('status') === 'published') {
-                return <Badge variant={"outline"}>{row.getValue('status')}</Badge>
-            } else {
-                return <Badge variant={"destructive"}>{row.getValue('status')}</Badge>
-            }
+            return (
+                <Badge variant={row.getValue('status') === 'published' ? 'outline' : 'destructive'}>
+                    {row.getValue('status')}
+                </Badge>
+            );
+
         }
     },
     {
         accessorKey: 'actions',
         header: 'Actions',
-        cell: ({row}) => {
+        cell: ({ row }) => {
             const rowData = row.original
             return (
                 <DropdownMenu>
@@ -64,7 +65,7 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="p-2">
                         <DropdownMenuItem className="p-2 cursor-pointer">
-                            <FaEdit className=" size-5"/>
+                            <FaEdit className=" size-5" />
                             <span>Edit</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem className="p-2 cursor-pointer">
