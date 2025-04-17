@@ -20,19 +20,8 @@ import { UploaderProvider, type UploadFn } from '@/components/upload/uploader-pr
 import { SingleImageDropzone } from '@/components/upload/SingleImageDropzone'
 import { useEdgeStore } from '@/lib/edgeStore'
 
-export const formSchema = z.object({
+const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
-    thumbnail: z
-        .custom<File>((file) => {
-            return (
-                file instanceof File &&
-                file.size > 0 &&
-                ["image/jpeg", "image/png"].includes(file.type)
-            );
-        }, {
-            message: "Please upload a valid .jpg or .png image",
-        }),
-    category: z.string().min(1, "Category is required"),
 });
 
 
@@ -57,8 +46,6 @@ const AddPage = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: '',
-            thumbnail: null as unknown as File,
-            category: '',
         },
     })
 
