@@ -13,7 +13,7 @@ type SidebarlinkProps = {
 const SidebarLinks = ({href, icon, label}:SidebarlinkProps) => {
     const {setOpenMobile, isMobile} = useSidebar()
     const pathname = usePathname();
-    const isActive = pathname === href;
+    const isActive = pathname === href || pathname.startsWith(href + '/');
 
     const handleClick = ()=>{
         if (isMobile) {

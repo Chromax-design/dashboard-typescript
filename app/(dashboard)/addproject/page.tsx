@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import { UploaderProvider, type UploadFn } from '@/components/upload/uploader-provider'
 import { SingleImageDropzone } from '@/components/upload/SingleImageDropzone'
 import { useEdgeStore } from '@/lib/edgeStore'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 
 
 const AddPage = () => {
+    const router = useRouter()
     const { edgestore } = useEdgeStore()
     const uploadFn: UploadFn = React.useCallback(
         async ({ file, onProgressChange, signal }) => {
@@ -49,6 +51,11 @@ const AddPage = () => {
         },
     })
 
+    const demoClick = () => {
+        const demoId = 12345
+        router.push(`/addproject/${demoId}`)
+    }
+
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }
@@ -63,7 +70,7 @@ const AddPage = () => {
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
                             <div className='space-y-2'>
                                 <FormLabel className="capitalize text-sm">select a thumbnail</FormLabel>
-                                <UploaderProvider uploadFn={uploadFn} autoUpload>
+                                <UploaderProvider uploadFn={uploadFn}>
                                     <SingleImageDropzone
                                         height={200}
                                         width={200}
@@ -87,7 +94,7 @@ const AddPage = () => {
                                 )}
                             />
                             <div className='flex gap-2'>
-                                <Button type="submit" className=" bg-blue-600 rounded-sm cursor-pointer hover:bg-blue-500 capitalize">add project</Button>
+                                <Button type="submit" className=" bg-blue-600 rounded-sm cursor-pointer hover:bg-blue-500 capitalize" onClick={()=> demoClick()}>add project</Button>
                             </div>
                         </form>
                     </Form>
