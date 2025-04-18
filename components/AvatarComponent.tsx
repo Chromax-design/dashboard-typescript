@@ -1,3 +1,5 @@
+"use client"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu,
@@ -7,9 +9,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 
 const AvatarComponent = () => {
+    const router = useRouter()
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="outline-none active:outline-none cursor-pointer">
@@ -24,7 +29,7 @@ const AvatarComponent = () => {
                     <span className="capitalize text-base">Godskey</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="p-0">
-                    <Button className=" w-full rounded-sm cursor-pointer bg-blue-600 hover:bg-blue-500 text-white capitalize">log out</Button>
+                    <Button className=" w-full rounded-sm cursor-pointer bg-blue-600 hover:bg-blue-500 text-white capitalize" type="button" onClick={() => router.push('/login')}>log out</Button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
