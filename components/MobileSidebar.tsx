@@ -1,8 +1,8 @@
 import Link from "next/link"
 import {
     Sheet,
+    SheetClose,
     SheetContent,
-    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle,
@@ -29,12 +29,14 @@ const MobileSidebar = () => {
                 <div className="flex-1 overflow-y-auto flex gap-4 flex-col px-4 pb-10">
                     {
                         navData.map((data, i) => (
-                            <div key={i} className="space-y-2">
-                                <Link href={data.link} className="capitalize text-base block">
-                                    {data.title}
-                                </Link>
-                                <Separator />
-                            </div>
+                            <SheetClose asChild key={i}>
+                                <div className="space-y-2">
+                                    <Link href={data.link} className="capitalize text-base block">
+                                        {data.title}
+                                    </Link>
+                                    <Separator />
+                                </div>
+                            </SheetClose>
                         ))
                     }
                 </div>

@@ -21,8 +21,8 @@ const UploadProjectImagespage = () => {
             <Breadcrumb className="pt-4">
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink>
-                            <Link href="/projects">My projects</Link>
+                        <BreadcrumbLink href="/projects">
+                            My projects
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />

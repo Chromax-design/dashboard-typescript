@@ -4,12 +4,12 @@ import TopBar from "@/components/TopBar"
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="">
+        <div className=" bg-neutral-50">
             <TopBar />
             <PageWrapper>
                 {children}
-                <footer className="mt-10 text-center text-gray-500 text-sm">Developed and designed by Cromax. Copyright &copy; {new Date().getFullYear()}</footer>
             </PageWrapper>
+            <footer className="mt-10 text-center text-gray-500 text-sm p-4">Developed and designed by Cromax. Copyright &copy; {new Date().getFullYear()}</footer>
         </div>
     )
 }

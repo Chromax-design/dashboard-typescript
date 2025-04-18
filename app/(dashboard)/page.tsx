@@ -38,8 +38,8 @@ const Home = () => {
           </Link>
         </CardHeader>
         <hr />
-        <CardContent className="relative w-full h-screen">
-          <Image src={'/banners/coming-soon.jpg'} alt="coming soon" fill className="rounded-sm object-cover"/>
+        <CardContent className="relative w-full">
+          <Image src={'/banners/coming-soon.jpg'} alt="coming soon" width={700} height={500} className="rounded-sm object-cover h-auto w-full"/>
         </CardContent>
       </Card>
     </section>
