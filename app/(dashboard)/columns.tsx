@@ -9,11 +9,25 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { HiDotsVertical } from "react-icons/hi";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Copy } from "lucide-react"
 
 export const columns: ColumnDef<projectDetailsTypes>[] = [
     {
@@ -29,10 +43,6 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
                     <Image src={row.getValue("thumbnail")} alt="just a random image" className=" rounded-sm" fill />
                 </div>)
         }
-    },
-    {
-        accessorKey: "category",
-        header: "Category",
     },
     {
         accessorKey: "date",
@@ -56,24 +66,58 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
         cell: ({ row }) => {
             const rowData = row.original
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-10 w-10 p-0 rounded-full cursor-pointer">
-                            <span className="sr-only">Open menu</span>
-                            <HiDotsVertical className="h-5 w-5" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="p-2">
-                        <DropdownMenuItem className="p-2 cursor-pointer">
-                            <FaEdit className=" size-5" />
-                            <span>Edit</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="p-2 cursor-pointer">
-                            <MdDelete className=" size-5" />
-                            <span>Delete</span>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <div className="flex gap-2">
+                    <form>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button variant="outline">Edit</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                                <DialogHeader>
+                                    <DialogTitle>Edit Title</DialogTitle>
+                                </DialogHeader>
+                                <Input
+                                    type="text"
+                                    defaultValue={rowData.title}
+                                />
+                                <DialogFooter className="sm:justify-start">
+                                    <Button type="submit" className="p-3 capitalize">
+                                        save changes
+                                    </Button>
+                                    <DialogClose asChild>
+                                        <Button type="button" variant="secondary">
+                                            Close
+                                        </Button>
+                                    </DialogClose>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                    </form>
+                    <form>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button variant="destructive">Delete</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                                <DialogHeader>
+                                    <DialogTitle className="text-center text-2xl">Are you sure about this?</DialogTitle>
+                                </DialogHeader>
+                                <DialogFooter className="flex justify-center! gap-4">
+                                    <Button type="submit" className="p-3 capitalize" variant={'destructive'}>
+                                        delete project
+                                    </Button>
+                                    <DialogClose asChild>
+                                        <Button type="button" variant="secondary">
+                                            close
+                                        </Button>
+                                    </DialogClose>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+
+                    </form>
+
+                </div>
             )
         }
     }

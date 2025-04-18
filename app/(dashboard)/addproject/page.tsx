@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import React, { useState } from 'react'
+import React from 'react'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -16,9 +16,6 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { UploaderProvider, type UploadFn } from '@/components/upload/uploader-provider'
-import { SingleImageDropzone } from '@/components/upload/SingleImageDropzone'
-import { useEdgeStore } from '@/lib/edgeStore'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -28,22 +25,6 @@ const formSchema = z.object({
 
 const AddPage = () => {
     const router = useRouter()
-    const { edgestore } = useEdgeStore()
-    const uploadFn: UploadFn = React.useCallback(
-        async ({ file, onProgressChange, signal }) => {
-            const res = await edgestore.publicImages.upload({
-                file,
-                signal,
-                onProgressChange,
-            });
-            // you can run some server action or api here
-            // to add the necessary data to your database
-
-            console.log(res);
-            return res;
-        },
-        [edgestore],
-    );
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -68,18 +49,6 @@ const AddPage = () => {
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-                            <div className='space-y-2'>
-                                <FormLabel className="capitalize text-sm">select a thumbnail</FormLabel>
-                                <UploaderProvider uploadFn={uploadFn}>
-                                    <SingleImageDropzone
-                                        height={200}
-                                        width={200}
-                                        dropzoneOptions={{
-                                            maxSize: 1024 * 1024 * 1, // 1 MB
-                                        }}
-                                    />
-                                </UploaderProvider>
-                            </div>
                             <FormField
                                 control={form.control}
                                 name="title"
@@ -87,14 +56,14 @@ const AddPage = () => {
                                     <FormItem>
                                         <FormLabel className="capitalize text-sm">project title</FormLabel>
                                         <FormControl>
-                                            <Input {...field} className="p-3 rounded-none block h-auto" />
+                                            <Input {...field} className="p-3 rounded-none h-auto max-w-prose" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
                             <div className='flex gap-2'>
-                                <Button type="submit" className=" bg-blue-600 rounded-sm cursor-pointer hover:bg-blue-500 capitalize" onClick={()=> demoClick()}>add project</Button>
+                                <Button type="submit" className=" bg-blue-600 rounded-sm cursor-pointer hover:bg-blue-500 capitalize">add project</Button>
                             </div>
                         </form>
                     </Form>
