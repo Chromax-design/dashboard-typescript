@@ -39,7 +39,9 @@ const MobileSidebar = () => {
                                 <SheetClose asChild>
                                     <button
                                         onClick={() => {
-                                            router.push(data.link);
+                                            setTimeout(()=>{
+                                                router.push(data.link);
+                                            }, 100)
                                         }}
                                         className="capitalize text-base block text-left w-full"
                                     >
