@@ -11,7 +11,7 @@ export const projectDetails: projectDetailsTypes[] = [
     title: 'Street Documentary',
     thumbnail: 'https://picsum.photos/seed/streetdoc/600/400',
     date: '2024-12-03',
-    status: 'draft',
+    status: 'pending',
   },
   {
     title: 'Cultural Portraits',
@@ -29,7 +29,7 @@ export const projectDetails: projectDetailsTypes[] = [
     title: 'Model Spotlight',
     thumbnail: 'https://picsum.photos/seed/modelspotlight/600/400',
     date: '2025-03-09',
-    status: 'draft',
+    status: 'pending',
   },
   {
     title: 'Campus Lifestyle Series',
@@ -53,7 +53,7 @@ export const projectDetails: projectDetailsTypes[] = [
     title: 'Afrocentric Series',
     thumbnail: 'https://picsum.photos/seed/afrocentric/600/400',
     date: '2025-01-05',
-    status: 'draft',
+    status: 'pending',
   },
   {
     title: 'Studio Expression',

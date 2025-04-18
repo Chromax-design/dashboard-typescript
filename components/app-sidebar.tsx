@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { MdOutlineDashboardCustomize} from "react-icons/md";
+import { FaDiagramProject } from "react-icons/fa6";
 import { TbLogout2 } from "react-icons/tb";
-import { IoIosSettings } from "react-icons/io";
 import SidebarLinks from "./SidebarLinks";
 
 export function AppSidebar() {
@@ -17,10 +17,10 @@ export function AppSidebar() {
             <SidebarHeader className="bg-white! h-14">
                 <Link href={'/'} className="text-3xl font-semibold">Cromax</Link>
             </SidebarHeader>
-            <SidebarContent className=" overflow-x-hidden bg-white pt-4">
+            <SidebarContent className=" overflow-x-hidden bg-white pt-4 px-2">
                 <SidebarLinks href="/" icon={<MdOutlineDashboardCustomize />} label="home" />
                 <SidebarSeparator />
-                <SidebarLinks href="/settings" icon={<IoIosSettings />} label="settings" />
+                <SidebarLinks href="/projects" icon={<FaDiagramProject />} label="My projects" />
                 <SidebarSeparator />
                 <SidebarMenuButton asChild>
                     <Link href={'/'} className="px-4 py-6">

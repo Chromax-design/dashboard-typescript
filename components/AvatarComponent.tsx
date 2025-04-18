@@ -20,11 +20,9 @@ const AvatarComponent = () => {
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className=" -translate-x-5 space-y-2">
-                <DropdownMenuItem className=" group">
-                    <Link href={'/profile'} className="flex gap-2 items-center group-hover:text-blue-600">
-                        <FaUserCircle className="size-5 group-hover:text-blue-600" />
-                        <span className="capitalize text-base">my profile</span>
-                    </Link>
+                <DropdownMenuItem className="flex gap-2 items-center group group-hover:text-blue-600">
+                    <FaUserCircle className="size-5 group-hover:text-blue-600" />
+                    <span className="capitalize text-base">Godskey</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="p-0">
                     <Button className=" w-full rounded-sm cursor-pointer bg-blue-600 hover:bg-blue-500 text-white capitalize">log out</Button>

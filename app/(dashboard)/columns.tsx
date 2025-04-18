@@ -4,44 +4,33 @@ import { projectDetailsTypes } from "@/lib/types"
 import { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "@/components/ui/badge"
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
     Dialog,
     DialogClose,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { HiDotsVertical } from "react-icons/hi";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { Label } from "@/components/ui/label"
+import { FaFolder } from "react-icons/fa";
 import { Input } from "@/components/ui/input"
-import { Copy } from "lucide-react"
+import Link from "next/link"
 
 export const columns: ColumnDef<projectDetailsTypes>[] = [
     {
         accessorKey: "title",
         header: "Title",
-    },
-    {
-        accessorKey: "thumbnail",
-        header: "Thumbnail",
         cell: ({ row }) => {
             return (
-                <div className="size-20 rounded-lg relative">
-                    <Image src={row.getValue("thumbnail")} alt="just a random image" className=" rounded-sm" fill />
-                </div>)
+                <Link href={`/projects/${row.original.title}`}>
+                    <Button className=" cursor-pointer" variant={'link'}>
+                        <FaFolder className="size-5" />
+                        <span>{row.getValue("title")}</span>
+                    </Button>
+                </Link>
+            )
         }
     },
     {

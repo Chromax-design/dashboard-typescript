@@ -4,51 +4,42 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { DataTable } from "./data-table"
-import { columns } from "./columns"
-import { projectDetails } from "@/lib/data"
-import { FaPlus } from "react-icons/fa"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
+import HomepageProjectTable from "@/components/HomepageProjectTable"
+import Link from "next/link"
+import Image from "next/image"
+
 
 
 const Home = () => {
   return (
-    <section>
+    <section className="space-y-4">
       <Card className="shadow-xl shadow-neutral-100 outline-none border-none">
         <CardHeader className="flex justify-between items-center">
-          <CardTitle className="capitalize text-2xl">my projects</CardTitle>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button type="button" variant={'outline'} className="cursor-pointer">
-                <span className="text-lg"><FaPlus /></span>
-                <span className="text-sm">New</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle>Create project</DialogTitle>
-              </DialogHeader>
-              <Input
-                type="text"
-              />
-              <DialogFooter className="sm:justify-start">
-                <Button type="submit" className="p-3 capitalize">
-                  create
-                </Button>
-                <DialogClose asChild>
-                  <Button type="button" variant="secondary">
-                    Cancel
-                  </Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <CardTitle className="capitalize text-2xl">latest projects</CardTitle>
+          <Link href={'/projects'}>
+            <Button type="button" variant={'outline'} className="cursor-pointer">
+              <span className="text-sm">View all</span>
+            </Button>
+          </Link>
         </CardHeader>
         <hr />
         <CardContent>
-          <DataTable columns={columns} data={projectDetails} />
+          <HomepageProjectTable />
+        </CardContent>
+      </Card>
+      <Card className="shadow-xl shadow-neutral-100 outline-none border-none">
+        <CardHeader className="flex justify-between items-center">
+          <CardTitle className="capitalize text-2xl">latest stories</CardTitle>
+          <Link href={'/projects'}>
+            <Button type="button" variant={'outline'} className="cursor-pointer">
+              <span className="text-sm">View all</span>
+            </Button>
+          </Link>
+        </CardHeader>
+        <hr />
+        <CardContent className="relative w-full h-screen">
+          <Image src={'/banners/coming-soon.jpg'} alt="coming soon" fill className="rounded-sm object-cover"/>
         </CardContent>
       </Card>
     </section>
