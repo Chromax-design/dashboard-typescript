@@ -11,8 +11,8 @@ const TopBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className={`sticky top-0 right-0 w-full bg-white/30 border-b border-gray-200 backdrop-blur-sm z-20 p-2`}>
-      <div className="flex justify-between">
+    <div className={`sticky top-0 right-0 w-full bg-white/30 border-b border-gray-200 backdrop-blur-sm z-20 p-2 h-14 flex justify-center items-center`}>
+      <div className="flex justify-between w-full">
         <div className="flex gap-6 items-center">
           <div className="flex items-center gap-2">
             <div className="md:hidden">

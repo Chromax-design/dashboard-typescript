@@ -40,8 +40,6 @@ const MobileSidebar = () => {
                                     <button
                                         onClick={() => {
                                             router.push(data.link);
-                                            setTimeout(() => {
-                                            }, 100);
                                         }}
                                         className="capitalize text-base block text-left w-full"
                                     >
