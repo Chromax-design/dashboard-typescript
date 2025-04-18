@@ -24,7 +24,7 @@ const MobileSidebar = () => {
     return (
         <Sheet>
             <SheetTrigger><MenuIcon /></SheetTrigger>
-            <SheetContent side="left" className=" max-sm:w-full flex flex-col">
+            <SheetContent side="left" className="flex flex-col">
                 <SheetHeader>
                     <div className="w-full sticky top-0">
                         <Logo />
@@ -39,9 +39,7 @@ const MobileSidebar = () => {
                                 <SheetClose asChild>
                                     <button
                                         onClick={() => {
-                                            setTimeout(() => {
-                                                router.push(data.link);
-                                            }, 100);
+                                            router.push(data.link);
                                         }}
                                         className="capitalize text-base block text-left w-full"
                                     >
