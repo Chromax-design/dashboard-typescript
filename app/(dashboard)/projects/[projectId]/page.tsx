@@ -1,4 +1,4 @@
-import React from "react"
+"use client"
 import Link from "next/link"
 
 import {
@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import UploadProjectImagescomponent from "@/components/UploadProjectImagescomponent"
+import { useParams } from "next/navigation"
 
 
-const UploadProjectImagespage = async () => {
+const UploadProjectImagespage = () => {
+    const {projectId} = useParams()
     return (
         <section className="space-y-5">
-            <Breadcrumb>
+            <Breadcrumb className="pt-4">
                 <BreadcrumbList>
                     <BreadcrumbItem>
                         <BreadcrumbLink>
@@ -25,7 +27,7 @@ const UploadProjectImagespage = async () => {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                        <BreadcrumbPage>{projectId}</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>

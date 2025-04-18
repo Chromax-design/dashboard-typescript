@@ -1,18 +1,36 @@
 "use client"
 
-import { AppSidebar } from "./app-sidebar"
+import Link from "next/link"
 import AvatarComponent from "./AvatarComponent"
-import { SidebarTrigger, useSidebar } from "./ui/sidebar"
+import MobileSidebar from "./MobileSidebar"
+import { navData } from "@/lib/data"
+import { usePathname } from "next/navigation"
+import Logo from "./Logo"
 
 const TopBar = () => {
-  const { open, isMobile } = useSidebar()
+  const pathname = usePathname();
 
   return (
-    <div className={`fixed top-0 right-0 max-md:w-full z-20 ${open ? 'w-[calc(100%-16rem)] duration-300' : 'w-full'} transition-all ease-in-out bg-white h-14 p-3 ${isMobile ? 'w-full shadow' : ''}`}>
-      <AppSidebar />
-      <div className="flex justify-between items-center">
-        <SidebarTrigger />
-        <AvatarComponent />
+    <div className={`sticky top-0 right-0 w-full bg-background/30 border-b border-gray-200 backdrop-blur-sm z-20 h-16 p-2`}>
+      <div className="flex justify-between">
+        <div className="flex gap-6 items-center">
+          <div className="flex items-center gap-2">
+            <div className="md:hidden">
+              <MobileSidebar />
+            </div>
+            <Logo />
+          </div>
+          <div className="max-md:hidden flex gap-5 items-center">
+            {
+              navData.map((data, i) => {
+                return <Link href={data.link} key={i} className={`${pathname === data.link || pathname.startsWith(data.link + `/`) ? 'text-neutral-950 underline tracking-widest font-semibold' : 'text-neutral-500 tracking-normal font-normal'} uppercase hover:text-neutral-950 transition-all ease-in-out text-xs`}>{data.title}</Link>
+              })
+            }
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <AvatarComponent />
+        </div>
       </div>
     </div>
   )

@@ -27,7 +27,7 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
                 <Link href={`/projects/${row.original.title}`}>
                     <Button className=" cursor-pointer" variant={'link'}>
                         <FaFolder className="size-5" />
-                        <span>{row.getValue("title")}</span>
+                        <span className=" max-sm:underline">{row.getValue("title")}</span>
                     </Button>
                 </Link>
             )
