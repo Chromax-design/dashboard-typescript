@@ -13,9 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import UploadProjectImagescomponent from "@/components/UploadProjectImagescomponent"
 
 
-const UploadProjectImagespage = async ({ params }: { params: { id: string } }) => {
-    const { id } = await params
-    console.log(id);
+const UploadProjectImagespage = async () => {
     return (
         <section className="space-y-5">
             <Breadcrumb>
