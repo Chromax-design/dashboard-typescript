@@ -1,8 +1,11 @@
+"use client"
+
 import Link from "next/link"
 import {
     Sheet,
     SheetClose,
     SheetContent,
+    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle,
@@ -13,9 +16,11 @@ import { navData } from "@/lib/data";
 import { Separator } from "./ui/separator";
 import SidebarAvatar from "./SidebarAvatar";
 import Logo from "./Logo";
+import { useRouter } from "next/navigation";
 
 
 const MobileSidebar = () => {
+    const router = useRouter()
     return (
         <Sheet>
             <SheetTrigger><MenuIcon /></SheetTrigger>
@@ -24,19 +29,27 @@ const MobileSidebar = () => {
                     <div className="w-full sticky top-0">
                         <Logo />
                     </div>
-                    <SheetTitle className="hidden">sidebar</SheetTitle>
+                    <SheetTitle className="sr-only">sidebar</SheetTitle>
+                    <SheetDescription className="sr-only">Navigate through the app</SheetDescription>
                 </SheetHeader>
                 <div className="flex-1 overflow-y-auto flex gap-4 flex-col px-4 pb-10">
                     {
                         navData.map((data, i) => (
-                            <SheetClose asChild key={i}>
-                                <div className="space-y-2">
-                                    <Link href={data.link} className="capitalize text-base block">
+                            <div className="space-y-2" key={i}>
+                                <SheetClose asChild>
+                                    <button
+                                        onClick={() => {
+                                            setTimeout(() => {
+                                                router.push(data.link);
+                                            }, 100);
+                                        }}
+                                        className="capitalize text-base block text-left w-full"
+                                    >
                                         {data.title}
-                                    </Link>
-                                    <Separator />
-                                </div>
-                            </SheetClose>
+                                    </button>
+                                </SheetClose>
+                                <Separator />
+                            </div>
                         ))
                     }
                 </div>

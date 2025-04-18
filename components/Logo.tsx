@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const Logo = () => {
   return (
-    <Link href={'/'} className="text-lg font-semibold border-2 px-3 py-1 border-neutral-800 rounded-sm">logo</Link>
+    <Link href={'/'} className="text-lg font-medium uppercase tracking-widest max-sm:pb-1">Cromax</Link>
   )
 }
 

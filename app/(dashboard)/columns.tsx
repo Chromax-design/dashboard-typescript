@@ -7,6 +7,7 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -64,6 +65,7 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
                             <DialogContent className="sm:max-w-md">
                                 <DialogHeader>
                                     <DialogTitle>Edit Title</DialogTitle>
+                                    <DialogDescription className="sr-only">edit the title</DialogDescription>
                                 </DialogHeader>
                                 <Input
                                     type="text"
@@ -90,6 +92,7 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
                             <DialogContent className="sm:max-w-md">
                                 <DialogHeader>
                                     <DialogTitle className="text-center text-2xl">Are you sure about this?</DialogTitle>
+                                    <DialogDescription className="sr-only">edit the title</DialogDescription>
                                 </DialogHeader>
                                 <DialogFooter className="flex justify-center! gap-4">
                                     <Button type="submit" className="p-3 capitalize" variant={'destructive'}>

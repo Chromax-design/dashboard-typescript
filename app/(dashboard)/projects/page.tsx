@@ -9,7 +9,7 @@ import {
   import { projectDetails } from "@/lib/data"
   import { FaPlus } from "react-icons/fa"
   import { Button } from "@/components/ui/button"
-  import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+  import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
   import { Input } from "@/components/ui/input"
   
   
@@ -30,6 +30,7 @@ const ProjectPage = () => {
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>Create project</DialogTitle>
+              <DialogDescription className="sr-only">edit the title</DialogDescription>
             </DialogHeader>
             <Input
               type="text"
