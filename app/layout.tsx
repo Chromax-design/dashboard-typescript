@@ -3,6 +3,7 @@ import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import UnsplashProvider from "@/components/UnsplashProvider";
 import { EdgeStoreProvider } from "@/lib/edgeStore";
+import { Toaster } from "@/components/ui/sonner";
 
 const josefinSans = Josefin_Sans({
   subsets: ['latin']
@@ -27,6 +28,7 @@ export default function RootLayout({
         <EdgeStoreProvider>
           <UnsplashProvider>
             {children}
+            <Toaster position="top-left" />
           </UnsplashProvider>
         </EdgeStoreProvider>
       </body>
