@@ -16,10 +16,10 @@ export default auth(async (req) => {
 
   if (isApiRoute) return;
   if (!isloggedIn && isPrivateRoute) {
-    return NextResponse.redirect(`${process.env.FRONTEND_URL}/login`);
+    return NextResponse.redirect(new URL(`${process.env.FRONTEND_URL}/login`, req.url));
   }
   if (isloggedIn && isAuthRoute) {
-    return NextResponse.redirect(`${process.env.FRONTEND_URL}/`);
+    return NextResponse.redirect(new URL(`${process.env.FRONTEND_URL}/`, req.url));
   }
   if (!isloggedIn && isAuthRoute) return
 
