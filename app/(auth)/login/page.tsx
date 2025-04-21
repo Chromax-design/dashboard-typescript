@@ -49,6 +49,7 @@ const Loginpage = () => {
       } else {
         toast.success("Login successful");
         router.push("/");
+        router.refresh();
       }
     } catch (error) {
       if (error instanceof AuthError) {
