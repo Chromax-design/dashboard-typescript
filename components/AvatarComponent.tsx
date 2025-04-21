@@ -11,12 +11,14 @@ import { FaUserCircle } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const AvatarComponent = () => {
   const router = useRouter();
   const handleSignOut = () => {
     signOut();
-    router.refresh();
+    router.replace("/login");
+    toast.success("You logged out");
   };
   return (
     <DropdownMenu>

@@ -31,6 +31,7 @@ const formSchema = z.object({
 
 const Loginpage = () => {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,10 +47,10 @@ const Loginpage = () => {
       setIsLoading(false);
       if (res?.error) {
         toast.error("Invalid login credentials");
-      } else {
+      }
+      if (res?.ok) {
+        router.replace("/");
         toast.success("Login successful");
-        router.push("/");
-        router.refresh();
       }
     } catch (error) {
       if (error instanceof AuthError) {

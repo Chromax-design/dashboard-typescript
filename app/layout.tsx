@@ -4,11 +4,11 @@ import "./globals.css";
 import UnsplashProvider from "@/components/UnsplashProvider";
 import { EdgeStoreProvider } from "@/lib/edgeStore";
 import { Toaster } from "@/components/ui/sonner";
+import MySessionProvider from "@/components/SessionProvider";
 
 const josefinSans = Josefin_Sans({
-  subsets: ['latin']
-})
-
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,15 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${josefinSans.className} antialiased`}
-      >
-        <EdgeStoreProvider>
-          <UnsplashProvider>
-            {children}
-            <Toaster position="top-left" />
-          </UnsplashProvider>
-        </EdgeStoreProvider>
+      <body className={`${josefinSans.className} antialiased`}>
+        <MySessionProvider>
+          <EdgeStoreProvider>
+            <UnsplashProvider>
+              {children}
+              <Toaster position="top-left" />
+            </UnsplashProvider>
+          </EdgeStoreProvider>
+        </MySessionProvider>
       </body>
     </html>
   );
