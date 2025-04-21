@@ -99,7 +99,7 @@ const Loginpage = () => {
             className=" rounded-none"
             disabled={isLoading ? true : false}
           >
-            {isLoading ? "Submitting" : "Submit"}
+            {isLoading ? "Submitting..." : "Submit"}
           </Button>
         </form>
       </Form>
