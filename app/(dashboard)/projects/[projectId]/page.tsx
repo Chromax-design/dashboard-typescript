@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,7 +8,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import UploadProjectImagescomponent from "@/components/UploadProjectImagescomponent";
-import withAuth from "@/lib/withAuth";
 import { useParams } from "next/navigation";
 
 const UploadProjectImagespage = () => {
@@ -42,4 +39,4 @@ const UploadProjectImagespage = () => {
   );
 };
 
-export default withAuth(UploadProjectImagespage);
+export default UploadProjectImagespage;

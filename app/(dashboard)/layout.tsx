@@ -1,7 +1,14 @@
+import { auth } from "@/auth";
 import PageWrapper from "@/components/PageWrapper";
 import TopBar from "@/components/TopBar";
+import { redirect } from "next/navigation";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   return (
     <div className=" bg-neutral-50">
       <TopBar />

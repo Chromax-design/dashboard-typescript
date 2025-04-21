@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "../data-table";
 import { columns } from "../columns";
@@ -17,7 +15,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import withAuth from "@/lib/withAuth";
 
 const ProjectPage = () => {
   return (
@@ -68,4 +65,4 @@ const ProjectPage = () => {
   );
 };
 
-export default withAuth(ProjectPage);
+export default ProjectPage;

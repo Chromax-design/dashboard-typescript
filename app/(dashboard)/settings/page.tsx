@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import withAuth from "@/lib/withAuth";
 
 const formSchema = z.object({
   password: z.string().min(5, {
@@ -97,4 +96,4 @@ const SettingsPage = () => {
   );
 };
 
-export default withAuth(SettingsPage);
+export default SettingsPage;
