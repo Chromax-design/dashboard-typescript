@@ -15,6 +15,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import withAuth from "@/lib/withAuth";
+import { useUpdatePasswordMutation } from "@/services/authentication";
+import { toast } from "sonner";
+import { signOut, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { normalizeError } from "@/helpers/helper";
 
 const formSchema = z.object({
   password: z.string().min(5, {
@@ -26,6 +31,12 @@ const formSchema = z.object({
 });
 
 const SettingsPage = () => {
+  const [updatePassword, { isLoading, isSuccess, error }] =
+    useUpdatePasswordMutation();
+
+  const session = useSession();
+  const userId = session?.data?.user?.id;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,9 +44,29 @@ const SettingsPage = () => {
       newPassword: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { newPassword, password } = values;
+    const isIdentical = newPassword === password;
+    if (!isIdentical) {
+      toast.error("Passwords do not match");
+      return null;
+    }
+    const formData = { ...values, id: userId };
+    await updatePassword(formData);
+  };
+
+  useEffect(() => {
+    if (error) {
+      const errMsg = normalizeError(error);
+      toast.error(errMsg || "An unknown error has occured");
+    }
+    if (isSuccess) {
+      toast.success("Password Updated successfully");
+      signOut({ callbackUrl: "/login" });
+    }
+  }, [error, isSuccess]);
+
   return (
     <section>
       <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
@@ -86,8 +117,12 @@ const SettingsPage = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className=" rounded-none bg-primary">
-                Submit
+              <Button
+                type="submit"
+                className=" rounded-none bg-primary"
+                disabled={isLoading ? true : false}
+              >
+                {isLoading ? "Updating..." : "Update"}
               </Button>
             </form>
           </Form>
