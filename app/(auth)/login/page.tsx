@@ -25,7 +25,7 @@ const formSchema = z.object({
     message: "Enter a valid email",
   }),
   password: z.string().min(2, {
-    message: "Username must be at least 6 characters.",
+    message: "Password must be at least 6 characters.",
   }),
 });
 
@@ -103,12 +103,12 @@ const Loginpage = () => {
           </Button>
         </form>
       </Form>
-      <p className="text-sm">
+      {/* <p className="text-sm">
         Don't have an account?{" "}
         <Link href={"/register"} className="text-destructive">
           Register
         </Link>
-      </p>
+      </p> */}
     </div>
   );
 };
