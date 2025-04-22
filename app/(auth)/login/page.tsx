@@ -88,7 +88,11 @@ const Loginpage = () => {
               <FormItem>
                 <FormLabel className="capitalize text-sm">Password</FormLabel>
                 <FormControl>
-                  <Input {...field} className="p-3 rounded-none block h-auto" />
+                  <Input
+                    {...field}
+                    className="p-3 rounded-none block h-auto"
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
