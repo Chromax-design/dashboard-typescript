@@ -17,7 +17,6 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { AuthError } from "next-auth";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const formSchema = z.object({
@@ -30,8 +29,6 @@ const formSchema = z.object({
 });
 
 const Loginpage = () => {
-  const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,12 +40,11 @@ const Loginpage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const res = await signIn("credentials", { ...values, redirect: false });
+      const res = await signIn("credentials", { ...values, callbackUrl: "/" });
       setIsLoading(false);
       if (res?.error) {
         toast.error("Invalid login credentials");
       } else {
-        router.replace("/");
         toast.success("Login successful");
       }
     } catch (error) {
