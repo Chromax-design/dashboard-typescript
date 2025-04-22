@@ -7,19 +7,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
-import { Button } from "./ui/button";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 const AvatarComponent = () => {
-  const router = useRouter();
-  const handleSignOut = () => {
-    signOut();
-    router.replace("/login");
-    toast.success("You logged out");
-  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none active:outline-none cursor-pointer">
@@ -34,13 +25,12 @@ const AvatarComponent = () => {
           <span className="capitalize text-base">Godskey</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="p-0">
-          <Button
-            className=" w-full rounded-sm cursor-pointer bg-blue-600 hover:bg-blue-500 text-white capitalize"
-            type="button"
-            onClick={() => handleSignOut()}
+          <Link
+            href={"/api/auth/signout"}
+            className=" w-full rounded-sm cursor-pointer bg-blue-600 hover:bg-blue-500 text-white capitalize p-1.5 text-center"
           >
             log out
-          </Button>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

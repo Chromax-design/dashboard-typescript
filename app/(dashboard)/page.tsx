@@ -1,8 +1,11 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import HomepageProjectTable from "@/components/HomepageProjectTable";
 import Link from "next/link";
 import Image from "next/image";
+import withAuth from "@/lib/withAuth";
 
 const HomePage = () => {
   return (
@@ -53,4 +56,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default withAuth(HomePage);
