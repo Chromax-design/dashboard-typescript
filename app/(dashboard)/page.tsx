@@ -9,8 +9,8 @@ import withAuth from "@/lib/withAuth";
 
 const HomePage = () => {
   return (
-    <section className="space-y-4">
-      <Card className="shadow-xl shadow-neutral-100 outline-none border-none">
+    <section className="space-y-10">
+      <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="capitalize text-2xl">latest projects</CardTitle>
           <Link href={"/projects"}>
@@ -28,7 +28,7 @@ const HomePage = () => {
           <HomepageProjectTable />
         </CardContent>
       </Card>
-      <Card className="shadow-xl shadow-neutral-100 outline-none border-none">
+      <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="capitalize text-2xl">latest stories</CardTitle>
           <Link href={"/projects"}>

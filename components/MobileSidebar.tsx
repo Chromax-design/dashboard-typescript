@@ -1,66 +1,69 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import {
-    Sheet,
-    SheetClose,
-    SheetContent,
-    SheetDescription,
-    SheetFooter,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet"
-import { MenuIcon } from "lucide-react";
+import Link from "next/link";
 import { navData } from "@/lib/data";
 import { Separator } from "./ui/separator";
-import SidebarAvatar from "./SidebarAvatar";
-import Logo from "./Logo";
-import { useRouter } from "next/navigation";
-
+import { useEffect, useRef, useState } from "react";
+import { IoIosMenu } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 const MobileSidebar = () => {
-    const router = useRouter()
-    return (
-        <Sheet>
-            <SheetTrigger><MenuIcon /></SheetTrigger>
-            <SheetContent side="left" className=" max-sm:w-full flex flex-col">
-                <SheetHeader>
-                    <div className="w-full sticky top-0">
-                        <Logo />
-                    </div>
-                    <SheetTitle className="sr-only">sidebar</SheetTitle>
-                    <SheetDescription className="sr-only">Navigate through the app</SheetDescription>
-                </SheetHeader>
-                <div className="flex-1 overflow-y-auto flex gap-4 flex-col px-4 pb-10">
-                    {
-                        navData.map((data, i) => (
-                            <div className="space-y-2" key={i}>
-                                <SheetClose asChild>
-                                    <button
-                                        onClick={() => {
-                                            setTimeout(()=>{
-                                                router.push(data.link);
-                                            }, 100)
-                                        }}
-                                        className="capitalize text-base block text-left w-full"
-                                    >
-                                        {data.title}
-                                    </button>
-                                </SheetClose>
-                                <Separator />
-                            </div>
-                        ))
-                    }
-                </div>
-                <SheetFooter className="flex items-center gap-2 flex-row">
-                    <SidebarAvatar />
-                    <p>godskey@gmail.com</p>
-                </SheetFooter>
-            </SheetContent>
-        </Sheet>
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const openSideBar = () => setIsOpen(true);
+  const closeSideBar = () => setIsOpen(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (sidebarRef.current && !sidebarRef.current.contains(target)) {
+        setIsOpen(false);
+      }
+    };
 
-    )
-}
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
-export default MobileSidebar
+  return (
+    <nav className="max-md:block hidden">
+      <span className=" text-3xl flex items-center" onClick={openSideBar}>
+        <IoIosMenu />
+      </span>
+      {isOpen && (
+        <div className="fixed h-screen inset-0 bg-black/40 z-10 transition-transform" />
+      )}
+      <div
+        className={`fixed left-0 top-0 bg-background min-w-72 h-screen z-20 transform transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+        ref={sidebarRef}
+      >
+        <div className="relative">
+          <div className="absolute p-4 bg-background w-full flex justify-end">
+            <span className="text-4xl" onClick={closeSideBar}>
+              <IoClose />
+            </span>
+          </div>
+        </div>
+        <div className="h-full overflow-y-auto">
+          <ul className=" capitalize flex flex-col pt-20 px-5">
+            {navData.map(({ link, title }, i) => (
+              <li key={i} className="text-xl">
+                <Link
+                  href={link}
+                  className="capitalize text-base block text-left w-full py-4"
+                  onClick={closeSideBar}
+                >
+                  {title}
+                </Link>
+                <Separator />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default MobileSidebar;

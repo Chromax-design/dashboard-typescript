@@ -28,7 +28,7 @@ const UploadProjectImagespage = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Card className="shadow-xl shadow-neutral-100 outline-none border-none">
+      <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
         <CardHeader>
           <CardTitle className="capitalize text-2xl">
             upload project images

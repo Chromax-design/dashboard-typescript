@@ -24,13 +24,13 @@ const AvatarComponent = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className=" -translate-x-5 space-y-2">
-        <DropdownMenuItem className="flex gap-2 items-center group group-hover:text-blue-600">
-          <FaUserCircle className="size-5 group-hover:text-blue-600" />
+        <DropdownMenuItem className="flex gap-2 items-center">
+          <FaUserCircle className="size-5" />
           <span className="capitalize text-base">Godskey</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="p-0">
           <Button
-            className=" w-full rounded-sm cursor-pointer bg-blue-600 hover:bg-blue-500 text-white capitalize"
+            className=" w-full rounded-sm cursor-pointer bg-primary capitalize"
             type="button"
             onClick={() => handleSignOut()}
           >

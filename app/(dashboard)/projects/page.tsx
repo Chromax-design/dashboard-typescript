@@ -22,7 +22,7 @@ import withAuth from "@/lib/withAuth";
 const ProjectPage = () => {
   return (
     <section>
-      <Card className="shadow-xl shadow-neutral-100 outline-none border-none">
+      <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="capitalize text-2xl">my projects</CardTitle>
           <Dialog>
