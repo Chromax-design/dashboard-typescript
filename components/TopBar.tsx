@@ -12,7 +12,7 @@ const TopBar = () => {
   const pathname = usePathname();
   return (
     <div
-      className={`sticky top-0 z-20 w-full h-14 border-b border-gray-200 bg-background/30 backdrop-blur-sm backdrop-saturate-150 p-2 `}
+      className={`sticky top-0 z-20 w-full h-14 border-b border-accent bg-background/30 backdrop-blur-sm backdrop-saturate-150 p-2 `}
     >
       <div className="max-w-7xl mx-auto flex items-center h-full">
         <div className="flex justify-between w-full items-center h-full">
