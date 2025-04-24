@@ -1,3 +1,5 @@
+import { Image } from "@prisma/client";
+
 export type projectDetailsTypes = {
   id: string; //change this
   title: string;
@@ -21,7 +23,7 @@ export type projects = {
   title: string;
   createdAt: Date;
   updatedAt: Date;
-  images?: string[];
+  images?: Image[];
   status: "PENDING" | "PUBLISHED";
 };
 

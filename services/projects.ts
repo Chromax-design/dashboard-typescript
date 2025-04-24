@@ -55,6 +55,7 @@ export const projectsApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: (result, error, { id }) => [{ type: "Projects", id }],
     }),
   }),
 });

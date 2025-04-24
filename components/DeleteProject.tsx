@@ -10,15 +10,30 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { projectDetailsTypes } from "@/lib/types";
-import { useDeleteProjectMutation } from "@/services/projects";
+import {
+  useDeleteProjectMutation,
+  useGetProjectByIdQuery,
+} from "@/services/projects";
 import { useEffect } from "react";
 import { normalizeError } from "@/helpers/helper";
 import { toast } from "sonner";
+import { useEdgeStore } from "@/lib/edgeStore";
 
 const DeleteProject = ({ rowData }: { rowData: projectDetailsTypes }) => {
   const [deleteProject, { isSuccess, error }] = useDeleteProjectMutation();
   const { id } = rowData;
+  const { data: projectData } = useGetProjectByIdQuery({ id });
+  const projectImages = projectData?.images || [];
+  const { edgestore } = useEdgeStore();
+
   const handleClick = async () => {
+    if (projectImages?.length > 0) {
+      for (const image of projectImages) {
+        await edgestore.publicImages.delete({
+          url: image.url,
+        });
+      }
+    }
     await deleteProject({ id });
   };
 

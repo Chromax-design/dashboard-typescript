@@ -30,7 +30,6 @@ const UploadProjectImagespage = () => {
   const images = project?.images || [];
   const imageCount = images.length;
   const imagesLeft = 20 - imageCount;
-  console.log(project);
 
   return (
     <>
@@ -69,7 +68,7 @@ const UploadProjectImagespage = () => {
                   plugins={[lgThumbnail, lgZoom]}
                   elementClassNames="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-5"
                 >
-                  {images.map((image: any, i) => {
+                  {images.map((image, i) => {
                     return (
                       <a href={image.url} className="">
                         <img
