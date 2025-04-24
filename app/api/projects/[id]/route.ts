@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export const GET = async (
-  req: Request,
-  context: { params: { id: string } }
-) => {
+export const GET = async (req: Request, context: any) => {
   try {
     const { id } = context.params;
     const data = await prisma.project.findUnique({
@@ -22,10 +19,7 @@ export const GET = async (
   }
 };
 
-export const PATCH = async (
-  req: Request,
-  context: { params: { id: string } }
-) => {
+export const PATCH = async (req: Request, context: any) => {
   try {
     const { id } = context.params;
     const { title } = await req.json();
@@ -60,10 +54,7 @@ export const PATCH = async (
   }
 };
 
-export const DELETE = async (
-  req: Request,
-  context: { params: { id: string } }
-) => {
+export const DELETE = async (req: Request, context: any) => {
   try {
     const { id } = context.params;
     const projectExists = await prisma.project.findUnique({
