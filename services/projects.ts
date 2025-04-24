@@ -50,10 +50,10 @@ export const projectsApi = createApi({
       invalidatesTags: ["Projects"],
     }),
     uploadImages: builder.mutation<string, imageUploadData>({
-      query: ({ id, ...otherData }) => ({
+      query: ({ id, ...body }) => ({
         url: `/projects/${id}/images`,
         method: "POST",
-        body: otherData,
+        body,
       }),
     }),
   }),

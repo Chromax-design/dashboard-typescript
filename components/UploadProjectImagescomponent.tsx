@@ -13,6 +13,8 @@ const UploadProjectImagescomponent = ({ projectId }: { projectId: string }) => {
   const { edgestore } = useEdgeStore();
   const uploadFn: UploadFn = React.useCallback(
     async ({ file, onProgressChange, signal }) => {
+      if (!projectId) throw new Error("Missing project ID");
+
       const res = await edgestore.publicImages.upload({
         file,
         signal,
@@ -28,7 +30,7 @@ const UploadProjectImagescomponent = ({ projectId }: { projectId: string }) => {
       console.log(res);
       return res;
     },
-    [edgestore]
+    [edgestore, projectId, uploadImages]
   );
 
   useEffect(() => {
