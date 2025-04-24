@@ -25,7 +25,6 @@ const UploadProjectImagescomponent = ({ projectId }: { projectId: string }) => {
         url: string;
       };
       await uploadImages({ id: projectId, thumbnailUrl, url });
-
       console.log(res);
       return res;
     },

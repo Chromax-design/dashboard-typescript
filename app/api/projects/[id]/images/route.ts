@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 
 export const POST = async (req: Request, context: any) => {
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
     const { thumbnailUrl, url } = await req.json();
     const isProjectExist = await prisma.project.findUnique({
       where: {
