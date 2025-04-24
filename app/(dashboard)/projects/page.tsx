@@ -18,8 +18,58 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import withAuth from "@/lib/withAuth";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  useCreateProjectMutation,
+  useGetProjectsQuery,
+} from "@/services/projects";
+import { useEffect } from "react";
+import { normalizeError } from "@/helpers/helper";
+import { toast } from "sonner";
+
+const formSchema = z.object({
+  title: z.string().min(2, {
+    message: "Title cannot be less than 2 characters",
+  }),
+});
 
 const ProjectPage = () => {
+  const [createProject, { isLoading, error, isSuccess }] =
+    useCreateProjectMutation();
+
+  const { data: projects } = useGetProjectsQuery();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const res = await createProject(values);
+    console.log(res);
+  };
+
+  useEffect(() => {
+    if (error) {
+      const errMsg = normalizeError(error);
+      toast.error(errMsg || "An unknown error occurred");
+    }
+    if (isSuccess) {
+      toast.success("Project created successfully");
+    }
+  }, [error, isSuccess]);
+
   return (
     <section>
       <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
@@ -42,26 +92,53 @@ const ProjectPage = () => {
               <DialogHeader>
                 <DialogTitle>Create project</DialogTitle>
                 <DialogDescription className="sr-only">
-                  edit the title
+                  create project
                 </DialogDescription>
               </DialogHeader>
-              <Input type="text" />
-              <DialogFooter className="sm:justify-start">
-                <Button type="submit" className="p-3 capitalize">
-                  create
-                </Button>
-                <DialogClose asChild>
-                  <Button type="button" variant="secondary">
-                    Cancel
-                  </Button>
-                </DialogClose>
-              </DialogFooter>
+              <Form {...form}>
+                <form
+                  className="space-y-4"
+                  onSubmit={form.handleSubmit(onSubmit)}
+                >
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="p-3 rounded-none block h-auto"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <DialogFooter className="sm:justify-start">
+                    <DialogTrigger asChild>
+                      <Button
+                        type="submit"
+                        className="p-3 capitalize"
+                        disabled={isLoading ? true : false}
+                      >
+                        {isLoading ? "creating..." : "create"}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogClose asChild>
+                      <Button type="button" variant="secondary">
+                        Cancel
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </form>
+              </Form>
             </DialogContent>
           </Dialog>
         </CardHeader>
         <hr />
         <CardContent>
-          <DataTable columns={columns} data={projectDetails} />
+          <DataTable columns={columns} data={projects ?? []} />
         </CardContent>
       </Card>
     </section>

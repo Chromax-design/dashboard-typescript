@@ -33,9 +33,11 @@ enum ProjectStatus {
 }
 
 model Image {
-    id        String   @id @default(cuid())
-    projectId String
-    project   Project  @relation(fields: [projectId], references: [id])
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id           String   @id @default(cuid())
+    projectId    String
+    url          String
+    thumbnailUrl String
+    project      Project  @relation(fields: [projectId], references: [id])
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
 }

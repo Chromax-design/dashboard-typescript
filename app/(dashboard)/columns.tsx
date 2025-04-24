@@ -1,116 +1,62 @@
-"use client"
+"use client";
 
-import { projectDetailsTypes } from "@/lib/types"
-import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/components/ui/badge"
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-
-import { Button } from "@/components/ui/button"
+import { projectDetailsTypes } from "@/lib/types";
+import { ColumnDef } from "@tanstack/react-table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { FaFolder } from "react-icons/fa";
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
+import Link from "next/link";
+import EditProject from "@/components/EditProject";
+import DeleteProject from "@/components/DeleteProject";
 
 export const columns: ColumnDef<projectDetailsTypes>[] = [
-    {
-        accessorKey: "title",
-        header: "Title",
-        cell: ({ row }) => {
-            return (
-                <Link href={`/projects/${row.original.title}`}>
-                    <Button className=" cursor-pointer" variant={'link'}>
-                        <FaFolder className="size-5" />
-                        <span className=" max-sm:underline">{row.getValue("title")}</span>
-                    </Button>
-                </Link>
-            )
-        }
+  {
+    accessorKey: "title",
+    header: "Title",
+    cell: ({ row }) => {
+      return (
+        <Link href={`/projects/${row.original.id}`}>
+          <Button className=" cursor-pointer" variant={"link"}>
+            <FaFolder className="size-5" />
+            <span className=" max-sm:underline">{row.getValue("title")}</span>
+          </Button>
+        </Link>
+      );
     },
-    {
-        accessorKey: "date",
-        header: "Date",
+  },
+  {
+    accessorKey: "date",
+    header: "Date",
+    cell: ({ row }) => {
+      return `${new Date(row.original.createdAt).toLocaleString()}`;
     },
-    {
-        accessorKey: "status",
-        header: "Status",
-        cell: ({ row }) => {
-            return (
-                <Badge variant={row.getValue('status') === 'published' ? 'outline' : 'destructive'}>
-                    {row.getValue('status')}
-                </Badge>
-            );
-
-        }
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      return (
+        <Badge
+          variant={
+            row.getValue("status") === "published" ? "outline" : "destructive"
+          }
+        >
+          {row.getValue("status")}
+        </Badge>
+      );
     },
-    {
-        accessorKey: 'actions',
-        header: 'Actions',
-        cell: ({ row }) => {
-            const rowData = row.original
-            return (
-                <div className="flex gap-2">
-                    <form>
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button variant="outline">Edit</Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-md">
-                                <DialogHeader>
-                                    <DialogTitle>Edit Title</DialogTitle>
-                                    <DialogDescription className="sr-only">edit the title</DialogDescription>
-                                </DialogHeader>
-                                <Input
-                                    type="text"
-                                    defaultValue={rowData.title}
-                                />
-                                <DialogFooter className="sm:justify-start">
-                                    <Button type="submit" className="p-3 capitalize">
-                                        save changes
-                                    </Button>
-                                    <DialogClose asChild>
-                                        <Button type="button" variant="secondary">
-                                            Close
-                                        </Button>
-                                    </DialogClose>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-                    </form>
-                    <form>
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button variant="destructive">Delete</Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-md">
-                                <DialogHeader>
-                                    <DialogTitle className="text-center text-2xl">Are you sure about this?</DialogTitle>
-                                    <DialogDescription className="sr-only">edit the title</DialogDescription>
-                                </DialogHeader>
-                                <DialogFooter className="flex justify-center! gap-4">
-                                    <Button type="submit" className="p-3 capitalize" variant={'destructive'}>
-                                        delete project
-                                    </Button>
-                                    <DialogClose asChild>
-                                        <Button type="button" variant="secondary">
-                                            close
-                                        </Button>
-                                    </DialogClose>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-
-                    </form>
-
-                </div>
-            )
-        }
-    }
-]
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({ row }) => {
+      const rowData = row.original;
+      return (
+        <div className="flex gap-2">
+          <EditProject rowData={rowData} />
+          <DeleteProject rowData={rowData} />
+        </div>
+      );
+    },
+  },
+];

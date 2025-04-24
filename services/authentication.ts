@@ -1,3 +1,4 @@
+import { updatePasswordData } from "@/lib/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const authenticationApi = createApi({
@@ -13,7 +14,7 @@ export const authenticationApi = createApi({
         body: formData,
       }),
     }),
-    updatePassword: builder.mutation({
+    updatePassword: builder.mutation<{ message: string }, updatePasswordData>({
       query: (formData) => ({
         url: "/update-password",
         method: "POST",

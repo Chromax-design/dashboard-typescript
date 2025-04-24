@@ -52,7 +52,7 @@ const SettingsPage = () => {
       toast.error("Passwords do not match");
       return null;
     }
-    const formData = { ...values, id: userId };
+    const formData = { ...values, id: String(userId) };
     await updatePassword(formData);
   };
 

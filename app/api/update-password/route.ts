@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const updatedUser = await prisma.user.update({
+    await prisma.user.update({
       where: {
         id,
       },
@@ -34,7 +34,6 @@ export const POST = async (req: Request) => {
       },
     });
 
-    const { password: _, ...safeUser } = updatedUser;
     return NextResponse.json(
       { message: "Password updated succesfully" },
       { status: 200 }
