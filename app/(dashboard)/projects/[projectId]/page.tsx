@@ -51,7 +51,7 @@ const UploadProjectImagespage = () => {
         <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
           <CardHeader>
             <CardTitle className="capitalize text-2xl">
-              {project?.title} ({imagesLeft} images left)
+              {project?.title} ({imageCount} / 20 images uploaded)
             </CardTitle>
           </CardHeader>
           <CardContent>

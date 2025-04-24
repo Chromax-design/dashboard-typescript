@@ -24,7 +24,7 @@ export const GET = async (req: Request, context: any) => {
 
 export const PATCH = async (req: Request, context: any) => {
   try {
-    const { id } = context.params;
+    const { id } = await context.params;
     const { title } = await req.json();
     const projectExists = prisma.project.findUnique({
       where: {

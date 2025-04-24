@@ -20,7 +20,8 @@ import { toast } from "sonner";
 import { useEdgeStore } from "@/lib/edgeStore";
 
 const DeleteProject = ({ rowData }: { rowData: projectDetailsTypes }) => {
-  const [deleteProject, { isSuccess, error }] = useDeleteProjectMutation();
+  const [deleteProject, { isSuccess, error, isLoading }] =
+    useDeleteProjectMutation();
   const { id } = rowData;
   const { data: projectData } = useGetProjectByIdQuery({ id });
   const projectImages = projectData?.images || [];
@@ -50,7 +51,9 @@ const DeleteProject = ({ rowData }: { rowData: projectDetailsTypes }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="destructive">Delete</Button>
+        <Button variant="destructive" disabled={isLoading ? true : false}>
+          {isLoading ? "Deleting..." : "Delete"}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

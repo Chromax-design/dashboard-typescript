@@ -42,6 +42,7 @@ const EditProject = ({ rowData }: { rowData: projectDetailsTypes }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const productId = rowData.id;
     await updateProject({ id: productId, ...values });
+    form.reset();
   };
 
   useEffect(() => {
@@ -54,10 +55,18 @@ const EditProject = ({ rowData }: { rowData: projectDetailsTypes }) => {
     }
   }, [error, isSuccess]);
 
+  useEffect(() => {
+    if (rowData?.title) {
+      form.reset({ title: rowData.title });
+    }
+  }, [rowData.title]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit</Button>
+        <Button variant="outline" disabled={isLoading ? true : false}>
+          {isLoading ? "Updating..." : "Edit"}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

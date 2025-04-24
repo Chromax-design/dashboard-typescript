@@ -34,6 +34,7 @@ import {
 import { useEffect } from "react";
 import { normalizeError } from "@/helpers/helper";
 import { toast } from "sonner";
+import Preloader from "@/components/Preloader";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -45,7 +46,7 @@ const ProjectPage = () => {
   const [createProject, { isLoading, error, isSuccess }] =
     useCreateProjectMutation();
 
-  const { data: projects } = useGetProjectsQuery();
+  const { data: projects, isLoading: projectLoading } = useGetProjectsQuery();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,8 +56,8 @@ const ProjectPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const res = await createProject(values);
-    console.log(res);
+    await createProject(values);
+    form.reset();
   };
 
   useEffect(() => {
@@ -70,77 +71,79 @@ const ProjectPage = () => {
   }, [error, isSuccess]);
 
   return (
-    <section>
-      <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
-        <CardHeader className="flex justify-between items-center">
-          <CardTitle className="capitalize text-2xl">my projects</CardTitle>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                type="button"
-                variant={"outline"}
-                className="cursor-pointer"
-              >
-                <span className="text-lg">
-                  <FaPlus />
-                </span>
-                <span className="text-sm">New</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle>Create project</DialogTitle>
-                <DialogDescription className="sr-only">
-                  create project
-                </DialogDescription>
-              </DialogHeader>
-              <Form {...form}>
-                <form
-                  className="space-y-4"
-                  onSubmit={form.handleSubmit(onSubmit)}
+    <>
+      {projectLoading && <Preloader />}
+      <section>
+        <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
+          <CardHeader className="flex justify-between items-center">
+            <CardTitle className="capitalize text-2xl">my projects</CardTitle>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  type="button"
+                  variant={"outline"}
+                  className="cursor-pointer"
+                  disabled={isLoading ? true : false}
                 >
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            className="p-3 rounded-none block h-auto"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <DialogFooter className="sm:justify-start">
-                    <DialogTrigger asChild>
-                      <Button
-                        type="submit"
-                        className="p-3 capitalize"
-                        disabled={isLoading ? true : false}
-                      >
-                        {isLoading ? "creating..." : "create"}
-                      </Button>
-                    </DialogTrigger>
-                    <DialogClose asChild>
-                      <Button type="button" variant="secondary">
-                        Cancel
-                      </Button>
-                    </DialogClose>
-                  </DialogFooter>
-                </form>
-              </Form>
-            </DialogContent>
-          </Dialog>
-        </CardHeader>
-        <hr />
-        <CardContent>
-          <DataTable columns={columns} data={projects ?? []} />
-        </CardContent>
-      </Card>
-    </section>
+                  <span className="text-lg">
+                    <FaPlus className={isLoading ? "hidden" : "inline-block"} />
+                  </span>
+                  <span className="text-sm">
+                    {isLoading ? "Creating..." : "New"}
+                  </span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Create project</DialogTitle>
+                  <DialogDescription className="sr-only">
+                    create project
+                  </DialogDescription>
+                </DialogHeader>
+                <Form {...form}>
+                  <form
+                    className="space-y-4"
+                    onSubmit={form.handleSubmit(onSubmit)}
+                  >
+                    <FormField
+                      control={form.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              className="p-3 rounded-none block h-auto"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <DialogFooter className="sm:justify-start">
+                      <DialogTrigger asChild>
+                        <Button type="submit" className="p-3 capitalize">
+                          create
+                        </Button>
+                      </DialogTrigger>
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary">
+                          Cancel
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </form>
+                </Form>
+              </DialogContent>
+            </Dialog>
+          </CardHeader>
+          <hr />
+          <CardContent>
+            <DataTable columns={columns} data={projects ?? []} />
+          </CardContent>
+        </Card>
+      </section>
+    </>
   );
 };
 

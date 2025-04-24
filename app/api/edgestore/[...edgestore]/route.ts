@@ -4,7 +4,7 @@ const es = initEdgeStore.create();
 
 const edgeStoreRouter = es.router({
   publicImages: es.imageBucket().beforeDelete(({ ctx, fileInfo }) => {
-    console.log("before upload", ctx, fileInfo);
+    console.log("before delete", ctx, fileInfo);
     return true;
   }),
 });
