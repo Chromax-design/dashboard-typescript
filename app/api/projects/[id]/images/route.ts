@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export const POST = async (
-  req: NextRequest,
-  context: { params: { id: string } }
-) => {
+export const POST = async (req: NextRequest, context: any) => {
   try {
     const { id } = context.params;
     const { thumbnailUrl, url } = await req.json();
