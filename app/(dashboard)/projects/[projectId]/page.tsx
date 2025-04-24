@@ -15,11 +15,22 @@ import withAuth from "@/lib/withAuth";
 import { useGetProjectByIdQuery } from "@/services/projects";
 import { useParams } from "next/navigation";
 
+import LightGallery from "lightgallery/react";
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+
 const UploadProjectImagespage = () => {
   const { projectId } = useParams();
   const { data: project, isLoading } = useGetProjectByIdQuery({
     id: projectId as string,
   });
+  const images = project?.images || [];
+  const imageCount = images.length;
+  const imagesLeft = 20 - imageCount;
+  console.log(project);
 
   return (
     <>
@@ -41,11 +52,38 @@ const UploadProjectImagespage = () => {
         <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
           <CardHeader>
             <CardTitle className="capitalize text-2xl">
-              upload project images
+              {project?.title} ({imagesLeft} images left)
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <UploadProjectImagescomponent projectId={project?.id as string} />
+            {imageCount < 20 && (
+              <UploadProjectImagescomponent
+                projectId={project?.id as string}
+                maxFiles={imagesLeft}
+              />
+            )}
+            {imageCount > 0 && (
+              <div className=" mt-10">
+                <LightGallery
+                  speed={500}
+                  plugins={[lgThumbnail, lgZoom]}
+                  elementClassNames="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-5"
+                >
+                  {images.map((image: any, i) => {
+                    return (
+                      <a href={image.url} className="">
+                        <img
+                          alt="img1"
+                          src={image.thumbnailUrl}
+                          className=" rounded-sm w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                          key={i}
+                        />
+                      </a>
+                    );
+                  })}
+                </LightGallery>
+              </div>
+            )}
           </CardContent>
         </Card>
       </section>

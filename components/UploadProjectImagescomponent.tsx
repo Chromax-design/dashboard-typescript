@@ -8,7 +8,13 @@ import { useUploadImagesMutation } from "@/services/projects";
 import { normalizeError } from "@/helpers/helper";
 import { toast } from "sonner";
 
-const UploadProjectImagescomponent = ({ projectId }: { projectId: string }) => {
+const UploadProjectImagescomponent = ({
+  projectId,
+  maxFiles,
+}: {
+  projectId: string;
+  maxFiles: number;
+}) => {
   const [uploadImages, { error, isSuccess }] = useUploadImagesMutation();
   const { edgestore } = useEdgeStore();
   const uploadFn: UploadFn = React.useCallback(
@@ -46,7 +52,7 @@ const UploadProjectImagescomponent = ({ projectId }: { projectId: string }) => {
   return (
     <UploaderProvider uploadFn={uploadFn} autoUpload>
       <ImageUploader
-        maxFiles={20}
+        maxFiles={maxFiles}
         maxSize={1024 * 1024 * 1} // 1 MB
       />
     </UploaderProvider>
