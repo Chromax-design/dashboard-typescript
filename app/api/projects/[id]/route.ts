@@ -3,10 +3,10 @@ import prisma from "@/lib/prisma";
 
 export const GET = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) => {
   try {
-    const { id } = await params;
+    const { id } = context.params;
     const data = await prisma.project.findUnique({
       where: {
         id,
@@ -24,10 +24,10 @@ export const GET = async (
 
 export const PATCH = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) => {
   try {
-    const { id } = await params;
+    const { id } = context.params;
     const { title } = await req.json();
     const projectExists = prisma.project.findUnique({
       where: {
@@ -62,10 +62,10 @@ export const PATCH = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) => {
   try {
-    const { id } = await params;
+    const { id } = context.params;
     const projectExists = await prisma.project.findUnique({
       where: {
         id,
