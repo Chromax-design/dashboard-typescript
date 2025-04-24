@@ -38,7 +38,7 @@ export const columns: ColumnDef<projectDetailsTypes>[] = [
       return (
         <Badge
           variant={
-            row.getValue("status") === "published" ? "outline" : "destructive"
+            row.getValue("status") === "PUBLISHED" ? "outline" : "destructive"
           }
         >
           {row.getValue("status")}

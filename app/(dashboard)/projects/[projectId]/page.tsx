@@ -75,7 +75,7 @@ const UploadProjectImagespage = () => {
                         <img
                           alt="img1"
                           src={image.thumbnailUrl}
-                          className=" rounded-sm w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                          className=" rounded-sm w-full h-80 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
                           key={i}
                         />
                       </a>
