@@ -9,7 +9,11 @@ export const GET = async (req: Request, context: any) => {
         id,
       },
       include: {
-        images: true,
+        images: {
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
       },
     });
     if (!data)
