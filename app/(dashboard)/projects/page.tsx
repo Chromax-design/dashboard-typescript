@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "../data-table";
 import { columns } from "../columns";
-import { projectDetails } from "@/lib/data";
 import { FaPlus } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import {
