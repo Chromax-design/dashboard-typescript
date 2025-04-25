@@ -29,7 +29,7 @@ const UploadProjectImagespage = () => {
   });
   const images = project?.images || [];
   const imageCount = images.length;
-  const imagesLeft = 20 - imageCount;
+  const imagesLeft = 25 - imageCount;
 
   return (
     <>
@@ -51,11 +51,11 @@ const UploadProjectImagespage = () => {
         <Card className="shadow-xl dark:shadow-sm shadow-accent outline-none border-none">
           <CardHeader>
             <CardTitle className="capitalize text-2xl">
-              {project?.title} ({imageCount} / 20 images uploaded)
+              {project?.title} ({imageCount} / 25 images uploaded)
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {imageCount < 20 && (
+            {imageCount < 25 && (
               <UploadProjectImagescomponent
                 projectId={project?.id as string}
                 maxFiles={imagesLeft}
