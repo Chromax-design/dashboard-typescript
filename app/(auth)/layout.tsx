@@ -1,6 +1,12 @@
 import { auth } from "@/auth";
 import UnsplashComponent from "@/components/UnsplashComponent";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Login page",
+  description: "Cromax dashboard user authentication page",
+};
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();

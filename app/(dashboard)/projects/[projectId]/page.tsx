@@ -62,7 +62,7 @@ const UploadProjectImagespage = () => {
               />
             )}
             {imageCount > 0 && (
-              <div className=" mt-10">
+              <div className=" mt-5">
                 <LightGallery
                   speed={500}
                   plugins={[lgThumbnail, lgZoom]}
