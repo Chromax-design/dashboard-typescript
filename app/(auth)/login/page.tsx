@@ -19,6 +19,8 @@ import { AuthError } from "next-auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -31,6 +33,7 @@ const formSchema = z.object({
 
 const Loginpage = () => {
   const router = useRouter();
+  const [showPwd, setShowPwd] = useState<boolean>(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -74,8 +77,11 @@ const Loginpage = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="capitalize text-sm">Email</FormLabel>
-                <FormControl>
-                  <Input {...field} className="p-3 rounded-none block h-auto" />
+                <FormControl className="">
+                  <Input
+                    {...field}
+                    className="p-3 rounded-none block h-auto w-full"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -88,11 +94,21 @@ const Loginpage = () => {
               <FormItem>
                 <FormLabel className="capitalize text-sm">Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    className="p-3 rounded-none block h-auto"
-                    type="password"
-                  />
+                  <div className="flex justify-between items-center">
+                    <Input
+                      {...field}
+                      className="p-3 rounded-none block h-auto"
+                      type={showPwd ? "text" : "password"}
+                    />
+                    <Button
+                      variant={"default"}
+                      className="h-full rounded-none"
+                      type="button"
+                      onClick={() => setShowPwd(!showPwd)}
+                    >
+                      {showPwd ? <IoEyeOff /> : <IoEye />}
+                    </Button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
